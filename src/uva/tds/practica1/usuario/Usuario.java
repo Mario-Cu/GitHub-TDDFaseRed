@@ -15,5 +15,9 @@ public class Usuario {
 	public String getNombre() {
 		return null;
 	}
+	
+	public Usuario getUsuarioPorNif(String nif) {
+		return null;
+	}
 
 }

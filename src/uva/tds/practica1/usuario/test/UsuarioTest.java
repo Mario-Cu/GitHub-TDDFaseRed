@@ -36,10 +36,16 @@ class UsuarioTest {
 	}
 	
 	@Test
-	void testConstructorCartaNoValidoNombreNulo() {
+	void testConstructorUsuarioNoValidoNombreNulo() {
 		assertThrows(IllegalArgumentException.class,()->{
 			new Usuario("33036946E",null);
 		});
+	}
+	
+	@Test
+	void testConstructorUsuarioIgualaOtroPorNIF() {
+		Usuario usr = new Usuario("33036946E","Usuario15caract");
+		assertSame(usr,usr.getUsuarioPorNif("33036946E"));
 	}
 
 

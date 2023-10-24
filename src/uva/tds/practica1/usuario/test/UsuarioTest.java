@@ -1,23 +1,24 @@
 package uva.tds.practica1.usuario.test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import uva.tds.practica1.usuario.Usuario;
 
 class UsuarioTest {
 
 	@Test
 	void testConstructorUsuarioNombreLimiteInferior() {
 		Usuario usr = new Usuario("33036946E","A");
-		assertEquals("C",usr.getNombre());
-		assertEquals(0,usr.getCoste());
+		assertEquals("33036946E",usr.getNif());
+		assertEquals("A",usr.getNombre());
 	}
 	
 	@Test
 	void testConstructorUsuarioNombreLimiteSuperior() {
 		Usuario usr = new Usuario("33036946E","Usuario15caract");
-		assertEquals("C",usr.getNombre());
-		assertEquals(0,usr.getCoste());
+		assertEquals("33036946E",usr.getNif());
+		assertEquals("Usuario15caract",usr.getNombre());
 	}
 
 	@Test

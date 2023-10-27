@@ -44,9 +44,30 @@ class UsuarioTest {
 	
 	@Test
 	void testConstructorUsuarioIgualaOtroPorNIF() {
-		Usuario usr = new Usuario("33036946E","Usuario15caract");
-		assertSame(usr,usr.getUsuarioPorNif("33036946E"));
+		Usuario usr = new Usuario("33036946E","UsuarioNormal");
+		Usuario usr2 = new Usuario("3303694E","UsuarioNormal");
+		assertTrue(usr.equals(usr2));
 	}
 
+	
+	@Test
+	void testConstructorUsuarioNIFLimite() {
+		Usuario usr = new Usuario("33036946E","UsuarioNormal");
+		assertEquals("33036946E",usr.getNif());
+		assertEquals("Usuario15caract",usr.getNombre());
+	}
 
+	@Test
+	void testConstructorUsuarioNoValidoNIFMenorLimiteInferior() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("3303694E","UsuarioNormal");
+		});
+	}
+	
+	@Test
+	void testConstructorUsuarioNoValidoNIFMayorQueLimiteSuperior() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("330369461E","UsuarioNormal");
+		});
+	}
 }

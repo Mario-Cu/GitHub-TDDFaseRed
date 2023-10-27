@@ -19,5 +19,16 @@ public class Usuario {
 	public Usuario getUsuarioPorNif(String nif) {
 		return null;
 	}
+	
+/**
+ * 	@Override
+	public boolean equals(Object o) {
+		Usuario u=(Usuario)o;
+		if(this.nif==u.getNif()) {
+			return true;
+		}
+		return false;
+	}
 
+ */
 }

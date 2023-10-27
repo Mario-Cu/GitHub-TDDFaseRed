@@ -58,6 +58,14 @@ class UsuarioTest {
 
 
 	@Test
+	void testConstructorUsuarioNoValidoNIFNulo() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario(null,"UsuarioNormal");
+		});
+	}
+	
+	
+	@Test
 	void testConstructorUsuarioNoValidoNIFMenorLimiteInferior() {
 		assertThrows(IllegalArgumentException.class,()->{
 			new Usuario("3303694E","UsuarioNormal");

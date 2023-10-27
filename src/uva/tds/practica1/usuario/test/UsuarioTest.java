@@ -2,11 +2,19 @@ package uva.tds.practica1.usuario.test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uva.tds.practica1.usuario.Usuario;
 
 class UsuarioTest {
-
+	
+	Usuario usrNormal;
+	
+	@BeforeEach
+	void setUp() {
+		this.usrNormal = new Usuario("33036946E","UsuarioNormal");
+	}
 	@Test
 	void testConstructorUsuarioNombreLimiteInferior() {
 		Usuario usr = new Usuario("33036946E","A");
@@ -16,8 +24,8 @@ class UsuarioTest {
 	
 	@Test
 	void testConstructorUsuarioNombreLimiteSuperior() {
-		Usuario usr = new Usuario("33036946E","Usuario15caract");
-		assertEquals("33036946E",usr.getNif());
+		Usuario usr = new Usuario("63265691M","Usuario15caract");
+		assertEquals("63265691M",usr.getNif());
 		assertEquals("Usuario15caract",usr.getNombre());
 	}
 
@@ -44,18 +52,10 @@ class UsuarioTest {
 	
 	@Test
 	void testConstructorUsuarioIgualaOtroPorNIF() {
-		Usuario usr = new Usuario("33036946E","UsuarioNormal");
 		Usuario usr2 = new Usuario("3303694E","UsuarioNormal");
-		assertTrue(usr.equals(usr2));
+		assertTrue(usrNormal.equals(usr2));
 	}
 
-	
-	@Test
-	void testConstructorUsuarioNIFLimite() {
-		Usuario usr = new Usuario("33036946E","UsuarioNormal");
-		assertEquals("33036946E",usr.getNif());
-		assertEquals("Usuario15caract",usr.getNombre());
-	}
 
 	@Test
 	void testConstructorUsuarioNoValidoNIFMenorLimiteInferior() {
@@ -70,4 +70,33 @@ class UsuarioTest {
 			new Usuario("330369461E","UsuarioNormal");
 		});
 	}
+	
+	@Test
+	void testConstructorNoValidoUsoLetraI() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("330369461I","UsuarioI");
+		});	
+	}
+	
+	@Test
+	void testConstructorNoValidoUsoLetraÑ() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("330369461Ñ","UsuarioÑ");
+		});	
+	}
+	
+	@Test
+	void testConstructorNoValidoUsoLetraO() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("330369461O","UsuarioO");
+		});	
+	}
+	
+	@Test
+	void testConstructorNoValidoUsoLetraU() {
+		assertThrows(IllegalArgumentException.class,()->{
+			new Usuario("330369461U","UsuarioU");
+		});	
+	}
+	
 }

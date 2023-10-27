@@ -20,15 +20,11 @@ public class Usuario {
 		return null;
 	}
 	
-/**
- * 	@Override
+
+ 	@Override
 	public boolean equals(Object o) {
-		Usuario u=(Usuario)o;
-		if(this.nif==u.getNif()) {
-			return true;
-		}
 		return false;
 	}
 
- */
+ 
 }

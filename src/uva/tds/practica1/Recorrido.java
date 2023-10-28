@@ -26,30 +26,66 @@ public class Recorrido {
 	public Recorrido (String id, String origen, String destino, String medioTransporte, float precio,LocalDate fecha,LocalTime hora,int plazas, int minutos) {
 		
 	}
+	/**
+	 * Devuelve el identificador del recorrido 
+	 * @return identificador del recorrido
+	 */
 	public String getId() {
 		return null;
 	}
+	/**
+	 * Devuelve el origen del recorrido
+	 * @return origen del recorrido
+	 */
 	public String getOrigen() {
 		return null;
 	}
+	/**
+	 * Devuelve el destino del recorrido
+	 * @return destino del recorrido
+	 */
 	public String getDestino() {
 		return null;
 	}
+	/**
+	 * Devuelve el medio de transporte del recorrido
+	 * @return medio de transporte del recorrido
+	 */
 	public String getMedioTransporte() {
 		return null;
 	}
+	/**
+	 * Devuelve el precio del recorrido
+	 * @return precio del recorrido
+	 */
 	public float getPrecio() {
 		return 0;
 	}
+	/**
+	 * Devuelve la fecha del recorrido 
+	 * @return fecha del recorrido
+	 */
 	public LocalDate getFecha() {
 		return null;
 	}
+	/**
+	 * Devuelve la hora del recorrido
+	 * @return hora del recorrido
+	 */
 	public LocalTime getHora() {
 		return null;
 	}
+	/**
+	 * Devuelve las plazas del recorrido
+	 * @return plazas del recorrido
+	 */
 	public int getPlazas() {
 		return 0;
 	}
+	/**
+	 * Devuelve la duracion del recorrido
+	 * @return duracion del recorrido
+	 */
 	public int getDuracion() {
 		return 0;
 	}

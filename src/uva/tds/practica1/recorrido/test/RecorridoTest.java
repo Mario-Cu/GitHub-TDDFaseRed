@@ -1,10 +1,11 @@
-package uva.tds.practica1.test;
+package uva.tds.practica1.recorrido.test;
 
-import uva.tds.practica1.Recorrido;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import uva.tds.practica1.recorrido.Recorrido;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

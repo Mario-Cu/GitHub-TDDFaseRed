@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import uva.tds.practica1.billete.Billete;
 import uva.tds.practica1.recorrido.Recorrido;
 import uva.tds.practica1.usuario.Usuario;
 
@@ -38,7 +39,7 @@ class BIlleteTest {
 	
 	@Test
 	void testConstructorBilleteLocalizadorLimiteSuperior() {
-		Billete billete = new Billete("Loc8cara",recorrido,usuario);
+		Billete billete = new Billete("Loc8cara",recorridoNormal,usrNormal);
 		assertEquals("Loc8cara",billete.getLocalizador());
 		assertEquals("1",recorridoNormal.getId());
 		assertEquals("UsuarioNormal",usrNormal.getNombre());

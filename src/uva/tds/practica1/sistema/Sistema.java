@@ -1,11 +1,11 @@
 package uva.tds.practica1.sistema;
-import uva.tds.practica1.recorrido.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import uva.tds.practica1.billete.*;
+import uva.tds.practica1.billete.Billete;
+import uva.tds.practica1.recorrido.Recorrido;
+import uva.tds.practica1.usuario.Usuario;
 
 public class Sistema {
 	
@@ -20,6 +20,14 @@ public class Sistema {
 	 */
 	public ArrayList<Recorrido> getRecorridos(){
 		return null;
+	}
+	
+	public ArrayList<Billete> getBilletes(){
+		return null;
+	}
+	
+	public void comprarBilletes(String loc, Usuario usr, Recorrido rec, int numBilletes) {
+		
 	}
 	
 	

@@ -24,10 +24,12 @@ class SistemaTest {
 	void setUp() throws Exception {
 		fecha = LocalDate.of(2002, 7, 18);
 		hora = LocalTime.of(12, 30);
-		recorrido1 = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
-		recorrido2 = new Recorrido("2","origen","destino","autobus",0,fecha,hora,1,1);
+		recorrido1 = new Recorrido("1","origen","destino","autobus",0,fecha,hora,5,1);
+		recorrido2 = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
 		usuario = new Usuario("33036946E","UsuarioNormal");
 	}
+	
+	
 	@Test
 	void testAñadirRecorridoAlSistema(){
 		Sistema sistema = new Sistema();
@@ -36,6 +38,41 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorrido1);
 		assertEquals(recorridos,sistema.getRecorridos());
 	}
+	
+	@Test
+	void testComprarBilleteEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetes.add(billetePrueba);
+		sistema.comprarBilletes("LocNorm",usuario,recorrido1,1);
+		assertEquals(billetes,sistema.getBilletes());
+		assertEquals(4,recorrido1.getPlazas());
+	}
+	
+	@Test
+	void testComprarVariosBilletesEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		for(int i = 1; i<4; i++) {
+			billetes.add(billetePrueba);
+		}
+		sistema.comprarBilletes("LocNorm",usuario,recorrido1,3);
+		assertEquals(billetes,sistema.getBilletes());
+	}
+	
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoPlazasInsuficientes(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorrido1,6);
+		});
+	}
+	
+	
+	
 	@Test	
 	void testAñadirRecorridoAlSistemaNoValidoDosRecorrridosConMismoIdentificador() {
 			Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
@@ -45,6 +82,9 @@ class SistemaTest {
 			sistema.añadirRecorrido(recorrido1Copia);
 		});
 	}
+	
+	
+	
 	@Test
 	void testEliminarRecorridoDelSistema() {
 		Sistema sistema = new Sistema();

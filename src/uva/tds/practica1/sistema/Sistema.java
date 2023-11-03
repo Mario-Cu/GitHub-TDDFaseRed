@@ -21,6 +21,8 @@ public class Sistema {
 	public ArrayList<Recorrido> getRecorridos(){
 		return null;
 	}
+	
+	
 	/**
 	 * Añade un recorrido al arraylist de recorridos
 	 * @param recorrido 

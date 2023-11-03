@@ -51,6 +51,18 @@ class SistemaTest {
 	}
 	
 	@Test
+	void testDevolverBilleteEnSistemaNoValidoBilleteNoComprado(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesComprados.add(billetePrueba);
+		Billete billeteADevolver = new Billete("LocNor2", recorrido1, usuario);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes("LocNor2",1);
+		});
+	}
+	
+	@Test
 	void testComprarVariosBilletesEnSistema(){
 		Sistema sistema = new Sistema();
 		ArrayList<Billete> billetes = new ArrayList<Billete>();

@@ -9,7 +9,9 @@ import uva.tds.practica1.usuario.Usuario;
 
 public class Sistema {
 	
-	
+	/**
+	 * Clase que representa un sistema.
+	 */
 
 	public Sistema() {
 		
@@ -22,10 +24,27 @@ public class Sistema {
 		return null;
 	}
 	
+	/**
+	 * Devuelve el arraylist que guardara los billetes
+	 * @return arraylist que guardara los billetes
+	 */
 	public ArrayList<Billete> getBilletes(){
 		return null;
 	}
 	
+	/**
+	 * Metodo para la compra de billetes en un sistema
+	 * @param loc Localizador del billete
+	 * @param usr Usuario que realiza la compra
+	 * @param rec Recorrido al cual esta asociado el billete
+	 * @param numBilletes Cantidad de billetes que busca comprar
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 * @throws IllegalArgumentException cuando usuario es nulo
+	 * @throws IllegalArgumentException cuando recorrido es nulo
+	 * @throws IllegalArgumentException cuando numBilletes es menor que 1
+	 * @throws IllegalArgumentException cuando el numero de plazas del recorrido no tiene suficientes plazas libres
+	 * @throws IllegalArgumentException cuando el recorrido no existe en el sistema
+	 */
 	public void comprarBilletes(String loc, Usuario usr, Recorrido rec, int numBilletes) {
 		
 	}
@@ -38,6 +57,8 @@ public class Sistema {
 	 */
 	public void añadirRecorrido(Recorrido recorrido) {
 	}
+	
+	
 	/**
 	 * Elimina un recorrido del arraylist de recorridos
 	 * @throws IllegalStateException cuando se elimina un recorrido con billetes asociados
@@ -45,6 +66,8 @@ public class Sistema {
 	public void eliminarRecorrido(String id) {
 		
 	}
+	
+	
 	/**
 	 * Actualiza la fecha de un recorrido
 	 * @param id identificador del recorrido
@@ -53,6 +76,8 @@ public class Sistema {
 	public void actualizarFechaRecorrido(String id,LocalDate fecha) {
 	
 	}
+	
+	
 	/**
 	 * Actualiza la hora de un recorrido 
 	 * @param id identificador del recorrido
@@ -61,4 +86,36 @@ public class Sistema {
 	public void actualizarHoraRecorrido(String id,LocalTime hora) {
 		
 	}
+	
+	/**
+	 * Metodo que permite comprar billetesReservados
+	 * @param loc Localizador de los billetes
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 */
+	public void comprarBilletesReservados(String loc) {
+
+	}
+	
+	/**
+	 * Metodo que devuelve una lista de los billetes Reservados
+	 * @return arraylist que guarda los billetes reservados
+	 */
+	public ArrayList<Billete> getBilletesReservados() {
+
+		return null;
+	}
+	
+	/**
+	 * Metodo para la devolucion de billetes
+	 * @param loc Localizador del billete a devolver
+	 * @param numBilletes Cantidad de billetes a devolver
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 * @throws IllegalArgumentException cuando numBilletes es menor que 1
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 * @throws IllegalArgumentException cuando loc no coincide con un billete previamente comprado
+	 */
+	public void devolverBilletes(String loc, int numBilletes) {
+	
+	}
+
 }

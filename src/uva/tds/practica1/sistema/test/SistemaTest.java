@@ -136,7 +136,8 @@ class SistemaTest {
 	void testComprarBilleteEnSistemaNoValidoLocalizadorNulo(){
 		Sistema sistema = new Sistema();
 		assertThrows(IllegalStateException.class, () ->{
-			sistema.comprarBilletes(null,usuario,recorrido1,6);
+			sistema.comprarBilletes(null,usuario,recorrido1,5);
+                     // no se habia cambiado el 6. Dos casos no validos a la vez.
 		});
 	}
 	

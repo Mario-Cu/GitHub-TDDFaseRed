@@ -75,7 +75,6 @@ class SistemaTest {
 	void testDevolverBilleteEnSistema(){
 		Sistema sistema = new Sistema();
 		ArrayList<Billete> billetes = new ArrayList<Billete>();
-		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
 		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		sistema.devolverBilletes("LocNorm",1);
 		assertEquals(billetes,sistema.getBilletes());

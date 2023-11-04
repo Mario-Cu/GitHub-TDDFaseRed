@@ -118,4 +118,31 @@ public class Sistema {
 	
 	}
 
+	
+	/**
+	* Metodo que devuelve el precio total de los billetes de un usuario
+	 * (Recordar que el precio de un billete de tren, tiene un 10% de descuento con respecto al precio del recorrido)
+	 * @param locUsr localizador del usuario
+	 * @throws IllegalArgumentException si el descuento del 10% en los billetes de tren no es aplicado
+	 * @throws IllegalArgumentException si el localizador de usuario es nulo
+	 * @return
+	 */
+	public float obtenerPrecioTotal(String locUsr) {
+		
+		return 0;
+	}
+	
+	/**
+	 * Metodo que devuelve un arraylist con los recorridos en una fecha dada
+	 * @param fecha Fecha en la que se buscan los recorridos
+	 * @return arraylist con los recorridos en una determinada fecha
+	 * @throws IllegalArgumentException si la fecha es nula
+	 * 
+	 */
+	public ArrayList<Recorrido> getRecorridosPorFecha(LocalDate fecha) {
+		
+		return null;
+	}
+
+
 }

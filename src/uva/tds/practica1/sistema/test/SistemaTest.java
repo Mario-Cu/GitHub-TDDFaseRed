@@ -51,6 +51,37 @@ class SistemaTest {
 	}
 	
 	@Test
+	void testComprarBilletesReservados(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesReservados.add(billetePrueba);
+		sistema.comprarBilletesReservados("LocNorm");
+		assertEquals(billetesReservados,sistema.getBilletesReservados());
+	}
+	
+	@Test
+	void testComprarBilletesReservadosNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesReservados.add(billetePrueba);
+		sistema.comprarBilletesReservados(null);
+		assertEquals(billetesReservados,sistema.getBilletesReservados());
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+		sistema.devolverBilletes("LocNorm",1);
+		assertEquals(billetes,sistema.getBilletes());
+		assertEquals(5,recorrido1.getPlazas());
+	}
+	
+	@Test
 	void testDevolverBilleteEnSistemaNoValidoBilleteNoComprado(){
 		Sistema sistema = new Sistema();
 		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
@@ -59,6 +90,30 @@ class SistemaTest {
 		Billete billeteADevolver = new Billete("LocNor2", recorrido1, usuario);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes("LocNor2",1);
+		});
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesComprados.add(billetePrueba);
+		Billete billeteADevolver = new Billete(null, recorrido1, usuario);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes(null,1);
+		});
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesComprados.add(billetePrueba);
+		Billete billeteADevolver = new Billete(null, recorrido1, usuario);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes(null,0);
 		});
 	}
 	
@@ -83,13 +138,57 @@ class SistemaTest {
 		});
 	}
 	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes(null,usuario,recorrido1,6);
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoUsuarioNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",null,recorrido1,6);
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoRecorridoNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,null,6);
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoRecorridoNoExisteEnSistema(){
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
+		Recorrido recorridoNoEnSistema = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,6);
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoNumeroDeBilletesMenorQueUno(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorrido1,0);
+		});
+	}
+	
+
+	
 	
 	
 	@Test	
 	void testAñadirRecorridoAlSistemaNoValidoDosRecorrridosConMismoIdentificador() {
-			Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
-			Sistema sistema = new Sistema();
-			sistema.añadirRecorrido(recorrido1);
+		Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.añadirRecorrido(recorrido1Copia);
 		});

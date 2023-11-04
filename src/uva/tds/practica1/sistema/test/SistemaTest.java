@@ -104,14 +104,12 @@ class SistemaTest {
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){
 		Sistema sistema = new Sistema();
-		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
-		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
-		billetesComprados.add(billetePrueba);
-		Billete billeteADevolver = new Billete(null, recorrido1, usuario);
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		assertThrows(IllegalStateException.class, () ->{
-			sistema.devolverBilletes(null,0);
+			sistema.devolverBilletes("locNorm",0);
 		});
-	}
+	} //Mismo que el anterior. Ademas no se habia cambiado el null del anterior test, 
+          //por lo que eran dos casos no validos a la vez
 	
 	@Test
 	void testComprarVariosBilletesEnSistema(){

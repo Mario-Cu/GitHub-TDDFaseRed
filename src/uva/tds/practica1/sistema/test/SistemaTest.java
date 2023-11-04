@@ -66,8 +66,9 @@ class SistemaTest {
 		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
 		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
 		billetesReservados.add(billetePrueba);
-		sistema.comprarBilletesReservados(null);
-		assertEquals(billetesReservados,sistema.getBilletesReservados());
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletesReservados(null);
+		});
 	}
 	
 	@Test

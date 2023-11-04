@@ -85,14 +85,12 @@ class SistemaTest {
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoBilleteNoComprado(){
 		Sistema sistema = new Sistema();
-		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
-		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
-		billetesComprados.add(billetePrueba);
-		Billete billeteADevolver = new Billete("LocNor2", recorrido1, usuario);
+                sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes("LocNor2",1);
 		});
-	}
+	} //no se habia comprado los billetes solo se habian añadido a el arraylist usado 
+          // para comparar. Ademas no hace falta crear el billete a devolver.
 	
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){

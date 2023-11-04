@@ -165,7 +165,9 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorrido1);
 		Recorrido recorridoNoEnSistema = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
 		assertThrows(IllegalStateException.class, () ->{
-			sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,6);
+			sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,5);
+                        //mas billetes que las plazas que tiene recorridoNoEnSistema
+                        //(creo que no importaria pero por si acaso)
 		});
 	}
 	

@@ -95,14 +95,11 @@ class SistemaTest {
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){
 		Sistema sistema = new Sistema();
-		ArrayList<Billete> billetesComprados = new ArrayList<Billete>();
-		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
-		billetesComprados.add(billetePrueba);
-		Billete billeteADevolver = new Billete(null, recorrido1, usuario);
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes(null,1);
 		});
-	}
+	}//lo mismo que el anterior
 	
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){

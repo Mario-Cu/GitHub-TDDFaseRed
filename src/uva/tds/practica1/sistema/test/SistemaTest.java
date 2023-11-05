@@ -237,8 +237,6 @@ class SistemaTest {
 		Sistema sistema = new Sistema();
 		sistema.añadirRecorrido(recorrido1);
 		sistema.añadirRecorrido(recorrido2);
-		Billete billete = new Billete("LocNor1",recorrido1,usuario);
-		Billete billete2 = new Billete("LocNor2",recorrido2,usuario);
 		sistema.comprarBilletes("LocNor1", usuario, recorrido1, 1);
 		sistema.comprarBilletes("LocNor2", usuario, recorrido2, 1);
 		float precioTotal = sistema.obtenerPrecioTotal(usuario.getNif());

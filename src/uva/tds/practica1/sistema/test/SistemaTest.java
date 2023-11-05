@@ -86,12 +86,12 @@ class SistemaTest {
 	@Test
 	void testReservarBilletes() {
 		Sistema sistema = new Sistema();
-		sistema.reservarBilletes("LocNorm",recorrido1,1);
+		sistema.reservarBilletes("LocNorm",usuario,recorrido1,1);
 		ArrayList<Billete> reservaBillete = new ArrayList<Billete>();
 		Billete billeteReservado = new Billete("LocNorm",recorrido1,usuario);
 		reservaBillete.add(billeteReservado);  
 		assertEquals(49,recorrido1.getPlazas());
-		assertEquals(billeteReservado,sistema.getReserva("LocNorm"));
+		assertEquals(billeteReservado,sistema.getReservaBilletes("LocNorm"));
 	}
 	@Test
 	void testReservarVariosBilletes() {
@@ -102,19 +102,19 @@ class SistemaTest {
 			reservaBilleteMultiple.add(reservaBillete);
 		}
 		sistema.reservarBilletes("LocNorm",usuario,recorrido1,3);
-		assertEquals(reservaBilleteMultiple,sistema.getReserva("LocNorm"));
+		assertEquals(reservaBilleteMultiple,sistema.getReservaBilletes("LocNorm"));
 	}
 	@Test
 	void testReservaBilletesNoValidaNumeroPlazasDisponiblesMenorQueMitadNumeroTotalPlazasAutobus() {
 		Sistema sistema = new Sistema();
-		Recorrido recorrido = new recorrido("1","origen","destino","autobus",5,fecha,hora,24,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",5,fecha,hora,24,1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.reservarBilletes("LocNorm",usuario,recorrido,1);
 		});
 	}
 	void testReservaBilletesNoValidaNumeroPlazasDisponiblesMenorQueMitadNumeroTotalPlazasTren() {
 		Sistema sistema = new Sistema();
-		Recorrido recorrido = new recorrido("1","origen","destino","tren",5,fecha,hora,124,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","tren",5,fecha,hora,124,1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.reservarBilletes("LocNorm",usuario,recorrido,1);
 		});
@@ -150,7 +150,7 @@ class SistemaTest {
 		reservaBilletes.add(billeteReservado);
 		sistema.reservarBilletes("LocNorm",usuario,recorrido1,2);
 		sistema.anularReservaBilletes("LocNorm",1);
-		assertEquals(billeteReservado,sistema.getReserva("LocNorm"));
+		assertEquals(billeteReservado,sistema.getReservaBilletes("LocNorm"));
 		assertEquals(49,recorrido1.getPlazas());
 	}
 	void testAnularReservaNoValidaBilleteNoPreviamenteReservados() {
@@ -165,5 +165,4 @@ class SistemaTest {
 			sistema.anularReservaBilletes(null,1);
 		});
 	}
-
 }

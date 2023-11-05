@@ -88,12 +88,73 @@ public class Sistema {
 	public void actualizarHoraRecorrido(String id,LocalTime hora) {
 		
 	}
+
+	/**
+	 * Metodo que permite comprar billetesReservados
+	 * @param loc Localizador de los billetes
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 */
+	public void comprarBilletesReservados(String loc) {
+
+	}
+	
+	/**
+	 * Metodo que devuelve una lista de los billetes Reservados
+	 * @return arraylist que guarda los billetes reservados
+	 */
+	public ArrayList<Billete> getBilletesReservados() {
+
+		return null;
+	}
+	
+	/**
+	 * Metodo para la devolucion de billetes
+	 * @param loc Localizador del billete a devolver
+	 * @param numBilletes Cantidad de billetes a devolver
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 * @throws IllegalArgumentException cuando numBilletes es menor que 1
+	 * @throws IllegalArgumentException cuando localizador es nulo
+	 * @throws IllegalArgumentException cuando loc no coincide con un billete previamente comprado
+	 */
+	public void devolverBilletes(String loc, int numBilletes) {
+	
+	}
+
+	
+	/**
+	* Metodo que devuelve el precio total de los billetes de un usuario
+	 * (Recordar que el precio de un billete de tren, tiene un 10% de descuento con respecto al precio del recorrido)
+	 * @param locUsr localizador del usuario
+	 * @throws IllegalArgumentException si el descuento del 10% en los billetes de tren no es aplicado
+	 * @throws IllegalArgumentException si el localizador de usuario es nulo
+	 * @return
+	 */
+	public float obtenerPrecioTotal(String locUsr) {
+		
+		return 0;
+	}
+	
+	/**
+	 * Metodo que devuelve un arraylist con los recorridos en una fecha dada
+	 * @param fecha Fecha en la que se buscan los recorridos
+	 * @return arraylist con los recorridos en una determinada fecha
+	 * @throws IllegalArgumentException si la fecha es nula
+	 * 
+	 */
+	public ArrayList<Recorrido> getRecorridosPorFecha(LocalDate fecha) {
+		
+		return null;
+	}
+
 	/**
 	 * Añade un billete al arraylist de billetes
 	 * @param billete billete a añadir al arraylists
 	 */
 	public void añadirBillete(Billete billete) {	
+
 	}
+
+
 	/**
 	 * Reserva un billete 
 	 * @param Localizador localizador del billete reservado 
@@ -104,6 +165,8 @@ public class Sistema {
 	public void reservarBilletes(String Localizador,Usuario usuario,Recorrido recorrido,int numBilletes) {
 		
 	}
+
+
 	/**
 	 * Devuelve un arraylist con todos los billetes reservados que tienen el mismo localizador
 	 * @param Localizador localizador de los billetes reservados
@@ -112,6 +175,8 @@ public class Sistema {
 	public ArrayList<Billete> getReservaBilletes(String Localizador) {
 		return null;
 	}
+
+	
 	/**
 	 * Anula la reserva de billetes reservados
 	 * @param Localizador localizador de los billetes reservados

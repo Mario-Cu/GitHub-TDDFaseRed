@@ -239,6 +239,69 @@ class SistemaTest {
 		assertEquals(49,recorrido1.getPlazas());
 		assertEquals(billeteReservado,sistema.getReservaBilletes("LocNorm"));
 	}
+	
+	@Test
+	void testObtenerPrecioTotal() {
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
+		sistema.añadirRecorrido(recorrido2);
+		sistema.comprarBilletes("LocNor1", usuario, recorrido1, 1);
+		sistema.comprarBilletes("LocNor2", usuario, recorrido2, 1);
+		float precioTotal = sistema.obtenerPrecioTotal(usuario.getNif());
+		assertEquals(precioTotal,9);
+	}
+	
+	@Test	
+	void testObtenerPrecioTotalNoValidoLocalizadorUsuarioNulo() {
+			Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			float precioTotal = sistema.obtenerPrecioTotal(null);
+		});
+	}
+	
+	@Test	
+	void testObtenerPrecioTotalNoValidoDescuentoTrenNoAplicado() {
+		Sistema sistema = new Sistema();
+		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		sistema.añadirRecorrido(recorridoTren);
+		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
+		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		assertThrows(IllegalStateException.class, () ->{
+			assertEquals(precioTotal,5);
+			
+		});
+	}
+
+	@Test	
+	void testObtenerPrecioTotaDescuentoTrenAplicado() {
+		Sistema sistema = new Sistema();
+		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		sistema.añadirRecorrido(recorridoTren);
+		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
+		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		assertEquals(precioTotal,4.5);
+	}
+	
+	@Test	
+	void testObtenerRecorridoDisponiblesPorFecha() {
+		Sistema sistema = new Sistema();
+		ArrayList<Recorrido> recorridosEnFecha = new ArrayList<Recorrido>();
+		sistema.añadirRecorrido(recorrido1);
+		recorridosEnFecha.add(recorrido1);
+		assertEquals(recorridosEnFecha,sistema.getRecorridosPorFecha(fecha));
+	}
+	
+	@Test	
+	void testObtenerRecorridoDisponiblesPorFechaNoValidoFechaNula() {
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.getRecorridosPorFecha(null);
+		});
+	}
+
+	
 	@Test
 	void testReservarVariosBilletes() {
 		Sistema sistema = new Sistema();

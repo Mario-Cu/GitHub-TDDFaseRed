@@ -51,4 +51,11 @@ public class Sistema {
 	public void actualizarHoraRecorrido(String id,LocalTime hora) {
 		
 	}
+	/**
+	 * Añade un billete al arraylist de billetes
+	 * @param billete billete a añadir al arraylists
+	 */
+	public void añadirBillete(Billete billete) {	
+	}
+	
 }

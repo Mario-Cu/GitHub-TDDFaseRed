@@ -28,6 +28,8 @@ class SistemaTest {
 		recorrido2 = new Recorrido("2","origen","destino","autobus",5,fecha,hora,50,1);
 		usuario = new Usuario("33036946E","UsuarioNormal");
 	}
+	
+	
 	@Test
 	void testAñadirRecorridoAlSistema(){
 		Sistema sistema = new Sistema();
@@ -36,15 +38,159 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorrido1);
 		assertEquals(recorridos,sistema.getRecorridos());
 	}
+	
+	@Test
+	void testComprarBilleteEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetes.add(billetePrueba);
+		sistema.comprarBilletes("LocNorm",usuario,recorrido1,1);
+		assertEquals(billetes,sistema.getBilletes());
+		assertEquals(4,recorrido1.getPlazas());
+	}
+	
+	@Test
+	void testComprarBilletesReservados(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesReservados.add(billetePrueba);
+		sistema.comprarBilletesReservados("LocNorm");
+		assertEquals(billetesReservados,sistema.getBilletesReservados());
+	}
+	
+	@Test
+	void testComprarBilletesReservadosNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		billetesReservados.add(billetePrueba);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletesReservados(null);
+		});
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+		sistema.devolverBilletes("LocNorm",1);
+		assertEquals(billetes,sistema.getBilletes());
+		assertEquals(5,recorrido1.getPlazas());
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistemaNoValidoBilleteNoComprado(){
+		Sistema sistema = new Sistema();
+                sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes("LocNor2",1);
+		});
+	} 
+	
+	@Test
+	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes(null,1);
+		});
+	}
+	
+	@Test
+	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){
+		Sistema sistema = new Sistema();
+		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.devolverBilletes("locNorm",0);
+		});
+	}
+	
+	@Test
+	void testComprarVariosBilletesEnSistema(){
+		Sistema sistema = new Sistema();
+		ArrayList<Billete> billetes = new ArrayList<Billete>();
+		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
+		for(int i = 1; i<4; i++) {
+			billetes.add(billetePrueba);
+		}
+		sistema.comprarBilletes("LocNorm",usuario,recorrido1,3);
+		assertEquals(billetes,sistema.getBilletes());
+	}
+	
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoPlazasInsuficientes(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorrido1,6);
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoLocalizadorNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes(null,usuario,recorrido1,5);
+ 
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoUsuarioNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",null,recorrido1,5);
+
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoRecorridoNulo(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,null,5);
+
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoRecorridoNoExisteEnSistema(){
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
+		Recorrido recorridoNoEnSistema = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
+		assertThrows(IllegalStateException.class, () ->{
+		sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,5);
+
+		});
+	}
+	
+	@Test
+	void testComprarBilleteEnSistemaNoValidoNumeroDeBilletesMenorQueUno(){
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorrido1,0);
+		});
+	}
+	
+
+	
+	
+	
 	@Test	
 	void testAñadirRecorridoAlSistemaNoValidoDosRecorrridosConMismoIdentificador() {
-			Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
-			Sistema sistema = new Sistema();
-			sistema.añadirRecorrido(recorrido1);
+		Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.añadirRecorrido(recorrido1Copia);
 		});
 	}
+	
+	
+	
 	@Test
 	void testEliminarRecorridoDelSistema() {
 		Sistema sistema = new Sistema();

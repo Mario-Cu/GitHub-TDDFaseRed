@@ -24,8 +24,8 @@ class SistemaTest {
 	void setUp() throws Exception {
 		fecha = LocalDate.of(2002, 7, 18);
 		hora = LocalTime.of(12, 30);
-		recorrido1 = new Recorrido("1","origen","destino","autobus",0,fecha,hora,5,1);
-		recorrido2 = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
+		recorrido1 = new Recorrido("1","origen","destino","autobus",4,fecha,hora,1,1);
+		recorrido2 = new Recorrido("2","origen","destino","autobus",5,fecha,hora,1,1);
 		usuario = new Usuario("33036946E","UsuarioNormal");
 	}
 	
@@ -88,8 +88,7 @@ class SistemaTest {
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes("LocNor2",1);
 		});
-	} //no se habia comprado los billetes solo se habian añadido a el arraylist usado 
-          // para comparar. Ademas no hace falta crear el billete a devolver.
+	} 
 	
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){
@@ -98,7 +97,7 @@ class SistemaTest {
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes(null,1);
 		});
-	}//lo mismo que el anterior
+	}
 	
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){
@@ -107,8 +106,7 @@ class SistemaTest {
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes("locNorm",0);
 		});
-	} //Mismo que el anterior. Ademas no se habia cambiado el null del anterior test, 
-          //por lo que eran dos casos no validos a la vez
+	}
 	
 	@Test
 	void testComprarVariosBilletesEnSistema(){
@@ -136,7 +134,7 @@ class SistemaTest {
 		Sistema sistema = new Sistema();
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.comprarBilletes(null,usuario,recorrido1,5);
-                     // no se habia cambiado el 6. Dos casos no validos a la vez.
+ 
 		});
 	}
 	
@@ -145,7 +143,7 @@ class SistemaTest {
 		Sistema sistema = new Sistema();
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.comprarBilletes("LocNorm",null,recorrido1,5);
-                        //mismo que anterior
+
 		});
 	}
 	
@@ -154,7 +152,7 @@ class SistemaTest {
 		Sistema sistema = new Sistema();
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.comprarBilletes("LocNorm",usuario,null,5);
-                        //mismo que anterior
+
 		});
 	}
 	
@@ -164,9 +162,8 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorrido1);
 		Recorrido recorridoNoEnSistema = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
 		assertThrows(IllegalStateException.class, () ->{
-			sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,5);
-                        //mas billetes que las plazas que tiene recorridoNoEnSistema
-                        //(creo que no importaria pero por si acaso)
+		sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,5);
+
 		});
 	}
 	
@@ -232,5 +229,64 @@ class SistemaTest {
 		assertEquals(horaNueva,recorrido1.getHora());
 	}
 	
+	@Test
+	void testObtenerPrecioTotal() {
+		Sistema sistema = new Sistema();
+		sistema.añadirRecorrido(recorrido1);
+		sistema.añadirRecorrido(recorrido2);
+		sistema.comprarBilletes("LocNor1", usuario, recorrido1, 1);
+		sistema.comprarBilletes("LocNor2", usuario, recorrido2, 1);
+		float precioTotal = sistema.obtenerPrecioTotal(usuario.getNif());
+		assertEquals(precioTotal,9);
+	}
+	
+	@Test	
+	void testObtenerPrecioTotalNoValidoLocalizadorUsuarioNulo() {
+			Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			float precioTotal = sistema.obtenerPrecioTotal(null);
+		});
+	}
+	
+	@Test	
+	void testObtenerPrecioTotalNoValidoDescuentoTrenNoAplicado() {
+		Sistema sistema = new Sistema();
+		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		sistema.añadirRecorrido(recorridoTren);
+		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
+		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		assertThrows(IllegalStateException.class, () ->{
+			assertEquals(precioTotal,5);
+			
+		});
+	}
 
+	@Test	
+	void testObtenerPrecioTotaDescuentoTrenAplicado() {
+		Sistema sistema = new Sistema();
+		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		sistema.añadirRecorrido(recorridoTren);
+		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
+		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		assertEquals(precioTotal,4.5);
+	}
+	
+	@Test	
+	void testObtenerRecorridoDisponiblesPorFecha() {
+		Sistema sistema = new Sistema();
+		ArrayList<Recorrido> recorridosEnFecha = new ArrayList<Recorrido>();
+		sistema.añadirRecorrido(recorrido1);
+		recorridosEnFecha.add(recorrido1);
+		assertEquals(recorridosEnFecha,sistema.getRecorridosPorFecha(fecha));
+	}
+	
+	@Test	
+	void testObtenerRecorridoDisponiblesPorFechaNoValidoFechaNula() {
+		Sistema sistema = new Sistema();
+		assertThrows(IllegalStateException.class, () ->{
+			sistema.getRecorridosPorFecha(null);
+		});
+	}
 }

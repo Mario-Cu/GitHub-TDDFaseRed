@@ -29,7 +29,8 @@ class RecorridoTest {
 		assertEquals(0,recorrido.getPrecio());
 		assertEquals(LocalDate.now(),recorrido.getFecha());
 		assertEquals(LocalTime.now(),recorrido.getHora());
-		assertEquals(1,recorrido.getPlazas());
+		assertEquals(1,recorrido.getPlazasDisponibles());
+		assertEquals(1,recorrido.getPlazasTotales());
 		assertEquals(1,recorrido.getDuracion());
 	}
 	@Test
@@ -42,7 +43,8 @@ class RecorridoTest {
 		assertEquals(0,recorrido.getPrecio());
 		assertEquals(LocalDate.now(),recorrido.getFecha());
 		assertEquals(LocalTime.now(),recorrido.getHora());
-		assertEquals(50,recorrido.getPlazas());
+		assertEquals(1,recorrido.getPlazasDisponibles());
+		assertEquals(50,recorrido.getPlazasTotales());
 		assertEquals(1,recorrido.getDuracion());
 	}
 	@Test
@@ -55,7 +57,8 @@ class RecorridoTest {
 		assertEquals(0,recorrido.getPrecio());
 		assertEquals(LocalDate.now(),recorrido.getFecha());
 		assertEquals(LocalTime.now(),recorrido.getHora());
-		assertEquals(1,recorrido.getPlazas());
+		assertEquals(1,recorrido.getPlazasDisponibles());
+		assertEquals(1,recorrido.getPlazasTotales());
 		assertEquals(1,recorrido.getDuracion());
 	}
 	@Test
@@ -68,7 +71,8 @@ class RecorridoTest {
 		assertEquals(0,recorrido.getPrecio());
 		assertEquals(LocalDate.now(),recorrido.getFecha());
 		assertEquals(LocalTime.now(),recorrido.getHora());
-		assertEquals(250,recorrido.getPlazas());
+		assertEquals(1,recorrido.getPlazasDisponibles());
+		assertEquals(250,recorrido.getPlazasTotales());
 		assertEquals(1,recorrido.getDuracion());
 	}
 	@Test

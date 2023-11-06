@@ -18,10 +18,10 @@ class RecorridoTest {
 		fecha = LocalDate.of(2002, 7, 18);
 		hora = LocalTime.of(12, 30);
 	}
-
+	
 	@Test
 	void testConstructorRecorridoAutobusLimiteInferior() {
-		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1,1);
 		assertEquals("1",recorrido.getId());
 		assertEquals("origen",recorrido.getOrigen());
 		assertEquals("destino",recorrido.getDestino());
@@ -34,7 +34,7 @@ class RecorridoTest {
 	}
 	@Test
 	void testConstructorRecorridoAutobusLimiteSuperior() {
-		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",0,fecha,hora,50,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,50,1);
 		assertEquals("1",recorrido.getId());
 		assertEquals("origen",recorrido.getOrigen());
 		assertEquals("destino",recorrido.getDestino());
@@ -47,7 +47,7 @@ class RecorridoTest {
 	}
 	@Test
 	void testConstructorRecorridoTrenLimiteInferior() {
-		Recorrido recorrido = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1,1);
 		assertEquals("1",recorrido.getId());
 		assertEquals("origen",recorrido.getOrigen());
 		assertEquals("destino",recorrido.getDestino());
@@ -60,7 +60,7 @@ class RecorridoTest {
 	}
 	@Test
 	void testConstructorRecorridoTrenLimiteSuperior() {
-		Recorrido recorrido = new Recorrido("1","origen","destino","tren",0,fecha,hora,250,1);
+		Recorrido recorrido = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,250,1);
 		assertEquals("1",recorrido.getId());
 		assertEquals("origen",recorrido.getOrigen());
 		assertEquals("destino",recorrido.getDestino());
@@ -75,115 +75,127 @@ class RecorridoTest {
 	void testConstructorRecorridoNoValidoIdentificadorMenorQueLimiteInferior() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido("","origen","destino","autobus",0,fecha,hora,1,1);
+			new Recorrido("","origen","destino","autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoIdentificadorNulo() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido(null,"origen","destino","autobus",0,fecha,hora,1,1);
+			new Recorrido(null,"origen","destino","autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoOrigenMenorQueLimiteInferior() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido("1","","destino","autobus",0,fecha,hora,1,1);
+			new Recorrido("1","","destino","autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoOrigenNulo() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido("1",null,"destino","autobus",0,fecha,hora,1,1);
+			new Recorrido("1",null,"destino","autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoDestinoMenorQueLimiteInferior() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido("1","origen","","autobus",0,fecha,hora,1,1);
+			new Recorrido("1","origen","","autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoDestinoNulo() {
 		
 		assertThrows(IllegalArgumentException.class,() ->{
-			new Recorrido("1","origen",null,"autobus",0,fecha,hora,1,1);
+			new Recorrido("1","origen",null,"autobus",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoMedioTransporteDiferente() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","coche",0,fecha,hora,1,1);
+			new Recorrido("1","origen","destino","coche",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoMedioTransporteVacio() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","",0,fecha,hora,1,1);
+			new Recorrido("1","origen","destino","",0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoMedioTransporteNulo() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino",null,0,fecha,hora,1,1);
+			new Recorrido("1","origen","destino",null,0,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoPrecioMenorQueLimiteInferior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","autobus",-1,fecha,hora,1,1);
+			new Recorrido("1","origen","destino","autobus",-1,fecha,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoFechaNula() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","autobus",0,null,hora,1,1);
+			new Recorrido("1","origen","destino","autobus",0,null,hora,1,1,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoHoraNula() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","autobus",0,fecha,null,1,1);
+			new Recorrido("1","origen","destino","autobus",0,fecha,null,1,1,1);
 		});
 	}
 	@Test
-	void testConstructorRecorridoNoValidoAutobusPlazasMenorQueLimiteInferior() {
+	void testContructorRecorridoNoValidoPlazasDisponiblesMenorQueLimiteInferior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","autobus",0,fecha,hora,0,1);
+			new Recorrido("1","origen","destino","autobus",0,fecha,hora,-1,1,1);
+		});
+	}
+	void testContructorRecorridoNoValidoPlazasDisponiblesMayorQuePlazasTotales() {
+		assertThrows(IllegalArgumentException.class, () ->{
+			new Recorrido("1","origen","destino","autobus",0,fecha,hora,2,1,1);
 		});
 	}
 	@Test
-	void testConstructorRecorridoNoValidoAutobusPlazasMayorQueLimiteSuperior() {
+	void testConstructorRecorridoNoValidoAutobusPlazasTotalesMenorQueLimiteInferior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","autobus",0,fecha,hora,51,1);
+			new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,0,1);
 		});
 	}
 	@Test
-	void testConstructorRecorridoNoValidoTrenPlazasMenorQueLimiteInferior() {
+	void testConstructorRecorridoNoValidoAutobusPlazasTotalesMayorQueLimiteSuperior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","tren",0,fecha,hora,0,1);
+			new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,51,1);
 		});
 	}
 	@Test
-	void testConstructorRecorridoNoValidoTrenPlazasMayorQueLimiteSuperior() {
+	void testConstructorRecorridoNoValidoTrenPlazasTotalesMenorQueLimiteInferior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","tren",0,fecha,hora,251,1);
+			new Recorrido("1","origen","destino","tren",0,fecha,hora,1,0,1);
+		});
+	}
+	@Test
+	void testConstructorRecorridoNoValidoTrenPlazasTotalesMayorQueLimiteSuperior() {
+		assertThrows(IllegalArgumentException.class, () ->{
+			new Recorrido("1","origen","destino","tren",0,fecha,hora,1,251,1);
 		});
 	}
 	@Test
 	void testConstructorRecorridoNoValidoMinutosMenorQueLimiteInferior() {
 		assertThrows(IllegalArgumentException.class, () ->{
-			new Recorrido("1","origen","destino","tren",0,fecha,hora,1,0);
+			new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1,0);
 		});
 	}
 	@Test
 	void testRecorridoIgualAOtroPorMismoIdentificador() {
-		Recorrido recorrido1 = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1);
-		Recorrido recorrido2 = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1);
+		Recorrido recorrido1 = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1,1);
+		Recorrido recorrido2 = new Recorrido("1","origen","destino","tren",0,fecha,hora,1,1,1);
 		assertEquals(recorrido1,recorrido2);
 	}
+	
 	
 }

@@ -24,8 +24,8 @@ class SistemaTest {
 	void setUp() throws Exception {
 		fecha = LocalDate.of(2002, 7, 18);
 		hora = LocalTime.of(12, 30);
-		recorrido1 = new Recorrido("1","origen","destino","autobus",5,fecha,hora,50,1);
-		recorrido2 = new Recorrido("2","origen","destino","autobus",5,fecha,hora,50,1);
+		recorrido1 = new Recorrido("1","origen","destino","autobus",5,fecha,hora,50,50,1);
+		recorrido2 = new Recorrido("2","origen","destino","autobus",5,fecha,hora,50,50,1);
 		usuario = new Usuario("33036946E","UsuarioNormal");
 	}
 	
@@ -47,7 +47,7 @@ class SistemaTest {
 		billetes.add(billetePrueba);
 		sistema.comprarBilletes("LocNorm",usuario,recorrido1,1);
 		assertEquals(billetes,sistema.getBilletes());
-		assertEquals(4,recorrido1.getPlazas());
+		assertEquals(49,recorrido1.getPlazasDisponibles());
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ class SistemaTest {
 		ArrayList<Billete> billetesReservados = new ArrayList<Billete>();
 		Billete billetePrueba = new Billete("LocNorm", recorrido1, usuario);
 		billetesReservados.add(billetePrueba);
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.comprarBilletesReservados(null);
 		});
 	}
@@ -78,13 +78,13 @@ class SistemaTest {
 		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		sistema.devolverBilletes("LocNorm",1);
 		assertEquals(billetes,sistema.getBilletes());
-		assertEquals(5,recorrido1.getPlazas());
+		assertEquals(50,recorrido1.getPlazasDisponibles());
 	}
 	
 	@Test
 	void testDevolverBilleteEnSistemaNoValidoBilleteNoComprado(){
 		Sistema sistema = new Sistema();
-                sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
+        sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.devolverBilletes("LocNor2",1);
 		});
@@ -94,7 +94,7 @@ class SistemaTest {
 	void testDevolverBilleteEnSistemaNoValidoLocalizadorNulo(){
 		Sistema sistema = new Sistema();
 		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.devolverBilletes(null,1);
 		});
 	}
@@ -103,7 +103,7 @@ class SistemaTest {
 	void testDevolverBilleteEnSistemaNoValidoNumBilletesMenorQueUno(){
 		Sistema sistema = new Sistema();
 		sistema.comprarBilletes("locNorm", usuario, recorrido1, 1);
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.devolverBilletes("locNorm",0);
 		});
 	}
@@ -124,15 +124,15 @@ class SistemaTest {
 	@Test
 	void testComprarBilleteEnSistemaNoValidoPlazasInsuficientes(){
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
-			sistema.comprarBilletes("LocNorm",usuario,recorrido1,6);
+		assertThrows(IllegalArgumentException.class, () ->{
+			sistema.comprarBilletes("LocNorm",usuario,recorrido1,51);
 		});
 	}
 	
 	@Test
 	void testComprarBilleteEnSistemaNoValidoLocalizadorNulo(){
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.comprarBilletes(null,usuario,recorrido1,5);
  
 		});
@@ -141,7 +141,7 @@ class SistemaTest {
 	@Test
 	void testComprarBilleteEnSistemaNoValidoUsuarioNulo(){
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.comprarBilletes("LocNorm",null,recorrido1,5);
 
 		});
@@ -150,7 +150,7 @@ class SistemaTest {
 	@Test
 	void testComprarBilleteEnSistemaNoValidoRecorridoNulo(){
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.comprarBilletes("LocNorm",usuario,null,5);
 
 		});
@@ -160,7 +160,7 @@ class SistemaTest {
 	void testComprarBilleteEnSistemaNoValidoRecorridoNoExisteEnSistema(){
 		Sistema sistema = new Sistema();
 		sistema.añadirRecorrido(recorrido1);
-		Recorrido recorridoNoEnSistema = new Recorrido("2","origen","destino","autobus",0,fecha,hora,5,1);
+		Recorrido recorridoNoEnSistema = new Recorrido("3","origen","destino","autobus",0,fecha,hora,50,50,1);
 		assertThrows(IllegalStateException.class, () ->{
 		sistema.comprarBilletes("LocNorm",usuario,recorridoNoEnSistema,5);
 
@@ -170,7 +170,7 @@ class SistemaTest {
 	@Test
 	void testComprarBilleteEnSistemaNoValidoNumeroDeBilletesMenorQueUno(){
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.comprarBilletes("LocNorm",usuario,recorrido1,0);
 		});
 	}
@@ -181,7 +181,7 @@ class SistemaTest {
 	
 	@Test	
 	void testAñadirRecorridoAlSistemaNoValidoDosRecorrridosConMismoIdentificador() {
-		Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
+		Recorrido recorrido1Copia = new Recorrido("1","origen","destino","autobus",0,fecha,hora,50,50,1);
 		Sistema sistema = new Sistema();
 		sistema.añadirRecorrido(recorrido1);
 		assertThrows(IllegalStateException.class, () ->{
@@ -236,7 +236,7 @@ class SistemaTest {
 		ArrayList<Billete> reservaBillete = new ArrayList<Billete>();
 		Billete billeteReservado = new Billete("LocNorm",recorrido1,usuario);
 		reservaBillete.add(billeteReservado);  
-		assertEquals(49,recorrido1.getPlazas());
+		assertEquals(49,recorrido1.getPlazasDisponibles());
 		assertEquals(billeteReservado,sistema.getReservaBilletes("LocNorm"));
 	}
 	
@@ -248,13 +248,13 @@ class SistemaTest {
 		sistema.comprarBilletes("LocNor1", usuario, recorrido1, 1);
 		sistema.comprarBilletes("LocNor2", usuario, recorrido2, 1);
 		float precioTotal = sistema.obtenerPrecioTotal(usuario.getNif());
-		assertEquals(precioTotal,9);
+		assertEquals(10,precioTotal);
 	}
 	
 	@Test	
 	void testObtenerPrecioTotalNoValidoLocalizadorUsuarioNulo() {
 			Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			float precioTotal = sistema.obtenerPrecioTotal(null);
 		});
 	}
@@ -262,13 +262,13 @@ class SistemaTest {
 	@Test	
 	void testObtenerPrecioTotalNoValidoDescuentoTrenNoAplicado() {
 		Sistema sistema = new Sistema();
-		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		Recorrido recorridoTren = new Recorrido("3","origen","destino","tren",5,fecha,hora,250,250,1);
 		sistema.añadirRecorrido(recorridoTren);
 		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
 		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
 		float precioTotal =sistema.obtenerPrecioTotal(usuario.getNif());
 		assertThrows(IllegalStateException.class, () ->{
-			assertEquals(precioTotal,5);
+			assertEquals(5,precioTotal);
 			
 		});
 	}
@@ -276,7 +276,7 @@ class SistemaTest {
 	@Test	
 	void testObtenerPrecioTotaDescuentoTrenAplicado() {
 		Sistema sistema = new Sistema();
-		Recorrido recorridoTren = new Recorrido("1","origen","destino","tren",5,fecha,hora,1,1);
+		Recorrido recorridoTren = new Recorrido("3","origen","destino","tren",5,fecha,hora,250,250,1);
 		sistema.añadirRecorrido(recorridoTren);
 		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
 		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
@@ -296,7 +296,7 @@ class SistemaTest {
 	@Test	
 	void testObtenerRecorridoDisponiblesPorFechaNoValidoFechaNula() {
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.getRecorridosPorFecha(null);
 		});
 	}
@@ -316,14 +316,14 @@ class SistemaTest {
 	@Test
 	void testReservaBilletesNoValidaNumeroPlazasDisponiblesMenorQueMitadNumeroTotalPlazasAutobus() {
 		Sistema sistema = new Sistema();
-		Recorrido recorrido = new Recorrido("1","origen","destino","autobus",5,fecha,hora,24,1);
+		Recorrido recorrido = new Recorrido("3","origen","destino","autobus",5,fecha,hora,24,50,1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.reservarBilletes("LocNorm",usuario,recorrido,1);
 		});
 	}
 	void testReservaBilletesNoValidaNumeroPlazasDisponiblesMenorQueMitadNumeroTotalPlazasTren() {
 		Sistema sistema = new Sistema();
-		Recorrido recorrido = new Recorrido("1","origen","destino","tren",5,fecha,hora,124,1);
+		Recorrido recorrido = new Recorrido("3","origen","destino","tren",5,fecha,hora,124,250,1);
 		assertThrows(IllegalStateException.class, () ->{
 			sistema.reservarBilletes("LocNorm",usuario,recorrido,1);
 		});
@@ -336,19 +336,19 @@ class SistemaTest {
 	}
 	void testReservaBilletesNoValidaRecorridoNoExistente() {
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.reservarBilletes("LocNorm",usuario,null,1);
 		});
 	}
 	void testReservaBilletesNoValidaLocalizadorNulo() {
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.reservarBilletes(null,usuario,recorrido1,1);
 		});
 	}
 	void testReservaBilletesNoValidaUsuarioNulo() {
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.reservarBilletes("LocNorm",null,recorrido1,1);
 		});
 	}
@@ -360,7 +360,7 @@ class SistemaTest {
 		sistema.reservarBilletes("LocNorm",usuario,recorrido1,2);
 		sistema.anularReservaBilletes("LocNorm",1);
 		assertEquals(billeteReservado,sistema.getReservaBilletes("LocNorm"));
-		assertEquals(49,recorrido1.getPlazas());
+		assertEquals(49,recorrido1.getPlazasDisponibles());
 	}
 	void testAnularReservaNoValidaBilleteNoPreviamenteReservados() {
 		Sistema sistema = new Sistema();
@@ -370,7 +370,7 @@ class SistemaTest {
 	}
 	void testAnularReservaNoValidaLocalizadorNulo() {
 		Sistema sistema = new Sistema();
-		assertThrows(IllegalStateException.class, () ->{
+		assertThrows(IllegalArgumentException.class, () ->{
 			sistema.anularReservaBilletes(null,1);
 		});
 	}

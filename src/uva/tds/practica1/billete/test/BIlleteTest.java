@@ -25,7 +25,7 @@ class BIlleteTest {
 		this.usrNormal = new Usuario("33036946E","UsuarioNormal");
 		fecha = LocalDate.of(2002, 7, 18);
 		hora = LocalTime.of(12, 30);
-		this.recorridoNormal = new Recorrido("1","origen","destino","autobus",0,fecha,hora,1,1);
+		this.recorridoNormal = new Recorrido("1","origen","destino","autobus",0,fecha,hora,50,50,1);
 
 	}
 	

@@ -266,7 +266,7 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorridoTren);
 		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
 		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
-		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario.getNif());
 		assertThrows(IllegalStateException.class, () ->{
 			assertEquals(precioTotal,5);
 			
@@ -280,7 +280,7 @@ class SistemaTest {
 		sistema.añadirRecorrido(recorridoTren);
 		Billete billete = new Billete("LocNor1",recorridoTren,usuario);
 		sistema.comprarBilletes("LocNor1", usuario, recorridoTren, 1);
-		float precioTotal =sistema.obtenerPrecioTotal(usuario);
+		float precioTotal =sistema.obtenerPrecioTotal(usuario.getNif());
 		assertEquals(precioTotal,4.5);
 	}
 	

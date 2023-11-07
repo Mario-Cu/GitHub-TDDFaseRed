@@ -7,6 +7,7 @@ public class Recorrido {
 
 	/**
 	 * Creacion de un recorrido
+	 * @author mardano (Mario Danov Ivanov)
 	 * @param id Identificador del recorrido. No puede tener menos que un caracter
 	 * @param origen Desde donde sale el recorrido. No puede tener menos que un caracter
 	 * @param destino Hasta donde llega el recorrido. No puede tener menos que un caracter

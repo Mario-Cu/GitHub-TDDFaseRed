@@ -7,6 +7,7 @@ public class Usuario {
 	
 	/**
 	 * Creacion de un usuario
+	 * @author marcobr (Mario Cobreros del Caz)
 	 * @param nif Identificador de una persona. Debe tener 9 caracteres
 	 * @param nombre Palabra con la que se denomina a una persona. Debe tener entre 1 y 15 caracteres
 	 * @throws IllegalArgumentException si la longitud de nombre es menor que 1

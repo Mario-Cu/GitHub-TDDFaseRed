@@ -1,7 +1,5 @@
-package uva.tds.practica1.billete;
+package uva.tds.practica1;
 
-import uva.tds.practica1.recorrido.Recorrido;
-import uva.tds.practica1.usuario.Usuario;
 /**
  * Clase que representa un billete.
  */

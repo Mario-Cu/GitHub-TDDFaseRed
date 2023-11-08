@@ -1,4 +1,4 @@
-package uva.tds.practica1.billete.test;
+package uva.tds.practica1.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,9 +9,9 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import uva.tds.practica1.billete.Billete;
-import uva.tds.practica1.recorrido.Recorrido;
-import uva.tds.practica1.usuario.Usuario;
+import uva.tds.practica1.Recorrido;
+import uva.tds.practica1.Usuario;
+import uva.tds.practica1.Billete;
 
 class BIlleteTest {
 	private Usuario usrNormal;

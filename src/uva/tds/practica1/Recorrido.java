@@ -1,4 +1,4 @@
-package uva.tds.practica1.recorrido;
+package uva.tds.practica1;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

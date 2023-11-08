@@ -1,4 +1,4 @@
-package uva.tds.practica1.sistema.test;
+package uva.tds.practica1.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import uva.tds.practica1.recorrido.*;
-import uva.tds.practica1.billete.*;
-import uva.tds.practica1.usuario.*;
-import uva.tds.practica1.sistema.*;
+import uva.tds.practica1.Billete;
+import uva.tds.practica1.Recorrido;
+import uva.tds.practica1.Sistema;
+import uva.tds.practica1.Usuario;
+
 class SistemaTest {
 	private Recorrido recorrido1;
 	private Recorrido recorrido2;

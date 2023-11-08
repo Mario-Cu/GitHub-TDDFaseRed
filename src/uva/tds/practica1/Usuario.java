@@ -1,4 +1,4 @@
-package uva.tds.practica1.usuario;
+package uva.tds.practica1;
 
 /**
  * Clase que representa un usuario.

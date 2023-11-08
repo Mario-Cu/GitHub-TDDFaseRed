@@ -1,14 +1,7 @@
-package uva.tds.practica1.sistema;
-import uva.tds.practica1.recorrido.*;
-import uva.tds.practica1.usuario.Usuario;
-
+package uva.tds.practica1;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
-import uva.tds.practica1.billete.Billete;
-import uva.tds.practica1.recorrido.Recorrido;
-import uva.tds.practica1.usuario.Usuario;
 
 public class Sistema {
 	

@@ -1,7 +1,5 @@
-package uva.tds.practica1.billete;
+package uva.tds.practica1;
 
-import uva.tds.practica1.recorrido.Recorrido;
-import uva.tds.practica1.usuario.Usuario;
 /**
  * Clase que representa un billete.
  */
@@ -9,6 +7,7 @@ public class Billete {
 
 	/**
 	 * Creacion de un billete
+	 * @author marcobr (Mario Cobreros del Caz)
 	 * @param localizador Identificador con el que encontramos el billete
 	 * @param recorrido	Objeto el cual nos indica el recorrido al que está asociado el billete
 	 * @param usuario Objeto el cual nos indica a que usuario le pertenece el billete

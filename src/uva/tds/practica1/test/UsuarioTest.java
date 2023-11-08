@@ -1,11 +1,12 @@
-package uva.tds.practica1.usuario.test;
+package uva.tds.practica1.test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import uva.tds.practica1.usuario.Usuario;
+
+import uva.tds.practica1.Usuario;
 
 class UsuarioTest {
 	

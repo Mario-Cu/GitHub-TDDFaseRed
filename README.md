@@ -19,4 +19,4 @@ Practica: Fase RED con metodologia TDD
 ## Autores
 * **Mario Cobreros del Caz** - [marcobr](https://gitlab.inf.uva.es/marcobr)
 
-* **Mario Danov Ivanov** - [danmart](https://gitlab.inf.uva.es/mardano)
+* **Mario Danov Ivanov** - [mardano](https://gitlab.inf.uva.es/mardano)

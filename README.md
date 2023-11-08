@@ -16,7 +16,14 @@ Practica: Fase RED con metodologia TDD
 - [x] F6.1 y F6.2
 - [x] F7.1 y F7.2
  
-## Autores
-* **Mario Cobreros del Caz** - [marcobr](https://gitlab.inf.uva.es/marcobr)
+## Clases que forman parte de la solucion
 
-* **Mario Danov Ivanov** - [mardano](https://gitlab.inf.uva.es/mardano)
+- [x] Billete.java
+- [x] Recorrido.java
+- [x] Sistema.java
+- [x] Usuario.java
+
+## Autores
+* **Mario Cobreros del Caz -- Horas Dedicadas: 9h** - [marcobr](https://gitlab.inf.uva.es/marcobr)
+
+* **Mario Danov Ivanov -- Horas Dedicadas: 10h** - [mardano](https://gitlab.inf.uva.es/mardano)
